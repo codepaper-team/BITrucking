@@ -1,0 +1,222 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes ken-burns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-graphite-950 font-sans text-graphite-200 antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading font-semibold leading-none;
+  }
+
+  p {
+    @apply leading-7;
+  }
+
+  img {
+    @apply block;
+  }
+
+  a,
+  button,
+  input,
+  select,
+  textarea {
+    @apply touch-manipulation;
+  }
+
+  ::selection {
+    background-color: rgba(217, 119, 6, 0.4);
+    color: #ffffff;
+  }
+}
+
+@layer components {
+  .shell {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 92rem;
+    padding-inline: 1rem;
+  }
+
+  .section-space {
+    padding-block: 4rem;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #d97706;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 2rem;
+    background-color: rgba(217, 119, 6, 0.6);
+  }
+
+  .panel {
+    border: 1px solid #2a3035;
+    border-radius: 1.8rem;
+    background-color: #121619;
+    box-shadow: 0 24px 70px -34px rgba(0, 0, 0, 0.72);
+  }
+
+  .panel-muted {
+    border: 1px solid #1d2226;
+    border-radius: 1.8rem;
+    background-color: #0a0d10;
+  }
+
+  .media-frame {
+    position: relative;
+    border: 1px solid #2a3035;
+    background-color: #121619;
+    box-shadow: 0 24px 70px -34px rgba(0, 0, 0, 0.72);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    background-color: #d97706;
+    padding: 0.75rem 1.5rem;
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: background-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 0.75rem 1.5rem;
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+  }
+
+  .field-input {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.2rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 0.75rem 1rem;
+    color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+  }
+
+  .hero-noise {
+    background-image:
+      radial-gradient(circle at top left, rgba(217, 119, 6, 0.12), transparent 34%),
+      radial-gradient(circle at 80% 20%, rgba(217, 119, 6, 0.08), transparent 26%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 40%);
+  }
+
+  .hero-bg-animate {
+    animation: ken-burns 20s ease-out forwards;
+  }
+
+  .btn-primary:hover {
+    background-color: #b45309;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px -6px rgba(217, 119, 6, 0.35);
+  }
+
+  .btn-primary:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #d97706, 0 0 0 4px #0a0d10;
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.4);
+  }
+
+  .btn-secondary:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2), 0 0 0 4px #0a0d10;
+  }
+
+  .field-input::placeholder {
+    color: #4d5861;
+  }
+
+  .field-input:focus {
+    border-color: #d97706;
+    box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.2);
+  }
+}
+
+@media (min-width: 640px) {
+  @layer components {
+    .shell {
+      padding-inline: 1.5rem;
+    }
+
+    .section-space {
+      padding-block: 5rem;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  @layer components {
+    .shell {
+      padding-inline: 2rem;
+    }
+
+    .section-space {
+      padding-block: 6rem;
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  @layer components {
+    .shell {
+      padding-inline: 2.5rem;
+    }
+  }
+}
