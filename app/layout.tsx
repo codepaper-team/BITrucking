@@ -1,10 +1,13 @@
 import type { Metadata } from 'next';
 import { Barlow_Condensed, IBM_Plex_Sans } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { company } from './lib/company';
 import { absoluteUrl, getOrganizationJsonLd, siteName, siteUrl } from './lib/seo';
+
+const GA_MEASUREMENT_ID = 'G-E6HR2C6LDX';
 
 const barlowCondensed = Barlow_Condensed({
   subsets: ['latin'],
@@ -83,6 +86,18 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={`${barlowCondensed.variable} ${ibmPlexSans.variable}`}>
+      <head>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_MEASUREMENT_ID}');`}
+        </Script>
+      </head>
       <body className="min-h-screen bg-graphite-950 font-sans text-graphite-200 antialiased">
         <script
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
