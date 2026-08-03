@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom Flatbed & Dump Truck Bodies | Georgia | BI Truck & Body</title>
+<meta name="description" content="Steel and aluminum flatbeds and dump bodies built to spec in Madison, GA, quality welds, in-house powder coating, on-time delivery across the Southeast.">
+<link rel="canonical" href="https://bitruckbody.com/lp/flatbed-dump-bodies">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+<!-- Google tag (gtag.js) -- loads BOTH GA4 and Google Ads in one call. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E6HR2C6LDX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-E6HR2C6LDX');       // Google Analytics (GA4)
+  gtag('config', 'AW-18353835974');     // Google Ads
+</script>
+<!-- DEV TEAM: nothing to do here. These 4 landing pages are fully
+     self-instrumented -- tags and conversion firing are already
+     built in. Your only tasks for these 4 files are in
+     00_INTEGRATION_CHECKLIST.md (publish the files, wire the form
+     endpoint). Do not add another copy of these tags to these
+     specific files, or edit anything below this comment. -->
+
+<style>
+:root{
+  --steel-900:#191c1e; --steel-800:#23272a; --steel-700:#33383c;
+  --paper:#f7f4ee; --paper-2:#efe9df;
+  --orange:#d8571e; --orange-dark:#a83f13;
+  --blue:#3e5c6e; --ink:#1c1e1f; --ink-soft:#565b5e;
+  --green:#3f6b4f; --line:#d9d2c3; --line-dark:#3a3f43;
+  --radius:6px;
+  --display: 'Oswald', 'Arial Narrow', sans-serif;
+  --body: 'Inter', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased;}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+h1,h2,h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.01em;margin:0;}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin:0 0 10px;}
+
+.topnav{background:var(--steel-900);padding:14px 0;}
+.topnav .wrap{display:flex;justify-content:space-between;align-items:center;}
+.topnav .brand{font-family:var(--display);color:#fff;font-size:19px;text-transform:uppercase;letter-spacing:.03em;}
+.topnav .brand span{color:var(--orange);}
+.topnav nav a{color:#cfd3d5;text-decoration:none;font-size:14px;margin-left:22px;}
+.topnav .call{background:var(--orange);color:#fff;padding:9px 16px;border-radius:var(--radius);font-weight:600;font-size:14px;text-decoration:none;}
+
+.hero{background:linear-gradient(180deg,var(--steel-900),var(--steel-800));color:#fff;padding:56px 0 76px;position:relative;overflow:hidden;}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:6px;background:repeating-linear-gradient(45deg,var(--orange) 0 14px,#000 14px 20px);opacity:.85;}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:start;}
+.hero h1{font-size:clamp(30px,4.2vw,50px);line-height:1.05;color:#fff;}
+.hero h1 em{font-style:normal;color:var(--orange);}
+.hero p.sub{font-family:var(--body);font-size:17px;color:#d7dadb;max-width:52ch;margin-top:16px;text-transform:none;letter-spacing:0;}
+
+.plate{background:var(--paper);border-radius:10px;padding:26px 26px 22px;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.35);}
+.plate .bolt-l,.plate .bolt-r{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#c9c2b2,#948c78);top:12px;}
+.plate .bolt-l{left:12px;} .plate .bolt-r{right:12px;}
+.plate h2{font-size:15px;color:var(--ink);margin-bottom:2px;}
+.plate .stamp{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase;margin-bottom:16px;display:block;}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.f-row.single{grid-template-columns:1fr;}
+.field label{display:block;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);margin-bottom:4px;}
+.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:5px;padding:9px 10px;font-family:var(--body);font-size:14px;color:var(--ink);}
+.field textarea{min-height:52px;resize:vertical;}
+.submit-btn{width:100%;background:var(--orange);color:#fff;border:none;padding:13px;border-radius:var(--radius);font-family:var(--display);font-size:15px;text-transform:uppercase;letter-spacing:.03em;cursor:pointer;margin-top:6px;}
+.submit-btn:hover{background:var(--orange-dark);}
+.micro{font-size:11.5px;color:var(--ink-soft);text-align:center;margin-top:10px;}
+
+.trust{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;}
+.trust .wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 34px;}
+.trust span{font-family:var(--mono);font-size:12.5px;letter-spacing:.03em;color:var(--ink-soft);}
+.trust span b{color:var(--ink);}
+
+.section{padding:64px 0;}
+.section h2.h-lg{font-size:clamp(24px,3vw,34px);margin-bottom:8px;}
+.section .lede{color:var(--ink-soft);max-width:60ch;margin-bottom:36px;font-size:15.5px;}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+.why-card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:22px 20px;}
+.why-card .num{font-family:var(--mono);color:var(--orange);font-size:12px;margin-bottom:10px;display:block;}
+.why-card h3{font-size:17px;text-transform:none;letter-spacing:0;margin-bottom:8px;}
+.why-card p{font-size:14.5px;color:var(--ink-soft);margin:0;}
+
+.specs{background:var(--steel-900);color:#e7e5df;}
+.specs h2{color:#fff;}
+.specs .lede{color:#a9adaf;}
+.spec-body{font-family:var(--mono);font-size:14px;line-height:1.8;color:#d3d6d3;border:1px solid var(--line-dark);border-radius:8px;padding:22px 24px;background:var(--steel-800);white-space:pre-wrap;}
+
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.proc-step{border-left:2px solid var(--orange);padding-left:16px;}
+.proc-step .n{font-family:var(--mono);color:var(--orange);font-size:13px;}
+.proc-step h3{font-size:15.5px;text-transform:none;letter-spacing:0;margin:6px 0 6px;}
+.proc-step p{font-size:13.5px;color:var(--ink-soft);margin:0;}
+
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.g-item{aspect-ratio:4/3;background:repeating-linear-gradient(135deg,var(--paper-2) 0 10px,#e4ddcd 10px 20px);border:1px dashed var(--line);border-radius:6px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;}
+.g-item span{font-family:var(--mono);font-size:11px;color:var(--ink-soft);}
+
+.faq details{border-bottom:1px solid var(--line);padding:16px 0;}
+.faq summary{font-family:var(--body);font-weight:600;font-size:15.5px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--orange);font-size:18px;}
+.faq details[open] summary::after{content:"\2212";}
+.faq p{color:var(--ink-soft);font-size:14.5px;margin:10px 0 0;max-width:70ch;}
+
+.cta-final{background:var(--steel-900);color:#fff;text-align:center;padding:60px 0;}
+.cta-final h2{color:#fff;font-size:clamp(24px,3vw,36px);margin-bottom:14px;}
+.cta-final .btn-lg{display:inline-block;background:var(--orange);color:#fff;text-decoration:none;padding:15px 34px;border-radius:var(--radius);font-family:var(--display);text-transform:uppercase;letter-spacing:.03em;font-size:15px;margin-top:10px;}
+
+footer{background:var(--steel-800);color:#aeb2b3;padding:34px 0;font-size:13px;}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;}
+footer a{color:#cfd3d5;text-decoration:underline;}
+
+.sticky-mobile{display:none;}
+@media (max-width:760px){
+  .hero-grid{grid-template-columns:1fr;}
+  .why-grid,.process-grid,.gallery{grid-template-columns:1fr 1fr;}
+  footer .wrap{flex-direction:column;}
+  .topnav nav a:not(.call){display:none;}
+  .sticky-mobile{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:50;background:var(--steel-900);border-top:2px solid var(--orange);}
+  .sticky-mobile a{flex:1;text-align:center;padding:13px 8px;font-family:var(--display);text-transform:uppercase;font-size:13px;text-decoration:none;color:#fff;letter-spacing:.02em;}
+  .sticky-mobile a.call{background:var(--orange);}
+  body{padding-bottom:54px;}
+}
+@media (max-width:520px){
+  .why-grid,.process-grid,.gallery{grid-template-columns:1fr;}
+}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px;}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+</style>
+</head>
+<body>
+<div class="topnav">
+  <div class="wrap">
+    <div class="brand">BI <span>TRUCK &amp; BODY</span></div>
+    <nav>
+        <a href="https://bitruckbody.com/products">Products</a>
+        <a href="https://bitruckbody.com/about">About</a>
+        <a href="https://bitruckbody.com/contact">Contact</a>
+
+      <a class="call" href="tel:706-343-4230">Call Now</a>
+    </nav>
+  </div>
+</div>
+
+<div class="hero" id="top-form"><div class="wrap hero-grid">
+  <div>
+    <p class="eyebrow">BI Truck &amp; Body &middot; Southeast US</p>
+    <h1>Flatbeds and Dump Bodies That <em>Outwork the Truck</em></h1>
+    <p class="sub">Steel and aluminum flatbeds, landscape dumps, mason dumps, and heavy contractor bodies, welded to last, powder coated in-house, delivered on the date we quote.</p>
+  </div>
+  <div>
+        <div class="plate">
+          <span class="bolt-l"></span><span class="bolt-r"></span>
+          <h2>Quote Your Flatbed or Dump Body</h2>
+          <span class="stamp">Spec &amp; Quote Request</span>
+          <!-- DEV TEAM: set the form action/method to the SAME confirmed working
+               destination as fleet@bitruckbody.com's contact form. This is the
+               #1 integration point -- do not launch until a real test
+               submission is confirmed received by Joe. data-lead-form
+               triggers automatic UTM capture (see JS at bottom of page). -->
+          <form data-lead-form action="/api/lp-lead" method="POST">
+            <div class="f-row">
+              <div class="field"><label>Name*</label><input type="text" name="name" required></div>
+              <div class="field"><label>Company</label><input type="text" name="company"></div>
+            </div>
+            <div class="f-row">
+              <div class="field"><label>Phone*</label><input type="tel" name="phone" required></div>
+              <div class="field"><label>Email*</label><input type="email" name="email" required></div>
+            </div>
+            <div class="f-row">
+              <div class="field">
+                <label>What do you need built?</label>
+                <select name="build_type">
+                  <option>Service Body</option><option>Crane or Mechanics Body</option>
+                  <option>Flatbed</option><option>Dump Body</option>
+                  <option>Service Van</option><option>Fleet Program</option><option>Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>When do you need it?</label>
+                <select name="timeline">
+                  <option>ASAP -- truck is down</option><option>Within 30 days</option>
+                  <option>1-3 months</option><option>Planning ahead</option>
+                  <option>Ongoing fleet needs</option>
+                </select>
+              </div>
+            </div>
+            <div class="f-row single">
+              <div class="field"><label>Chassis (optional)</label><input type="text" name="chassis" placeholder="e.g., 2024 F-550, cab & chassis"></div>
+            </div>
+            <div class="f-row single">
+              <div class="field"><label>Notes (optional)</label><textarea name="notes"></textarea></div>
+            </div>
+            <button type="submit" class="submit-btn">Request My Quote</button>
+            <p class="micro">Two minutes now, a real quote fast.</p>
+          </form>
+        </div>
+</div>
+</div></div>
+
+<div class="trust"><div class="wrap">
+  <span><b>Built in Madison, GA</b></span>
+  <span><b>40+ Years</b> Combined Experience</span>
+  <span><b>In-House</b> Powder Coating</span>
+  <!-- DEV/GRACE: insert Atlanta Gas Light logo here once permission is
+       confirmed. Until then, leave this item out -- do not name the
+       client without sign-off. -->
+</div></div>
+
+<div class="section"><div class="wrap">
+  <p class="eyebrow">Why BI</p>
+  <h2 class="h-lg">Built Different, On Purpose</h2>
+  <div class="why-grid"><div class="why-card"><span class="num">01</span><h3>Decks built for the load, not the brochure.</h3><p>Custom lengths, custom crossmember spacing, gussets where your load actually sits. Steel for daily drag loads, aluminum when payload math matters.</p></div><div class="why-card"><span class="num">02</span><h3>Dump bodies with the geometry right.</h3><p>Hoist angle, hinge reinforcement, tailgate action, the stuff that makes a dump body work for ten years or fail in two. We've built enough to know exactly where they break.</p></div><div class="why-card"><span class="num">03</span><h3>One shop, start to finish.</h3><p>Fabrication, assembly, hydraulics, and powder coating under one roof in Madison, GA. No sub-contractor delays, no finger-pointing, one date, the one we quoted you.</p></div></div>
+</div></div>
+<div class="section specs"><div class="wrap">
+  <p class="eyebrow" style="color:var(--orange);">Materials &amp; Specs</p>
+  <h2 class="h-lg">What We Build, and What It's Made Of</h2>
+  <div class="spec-body" style="margin-top:22px;">FLATBEDS ........ Steel or aluminum, 8'-26' standard &amp; custom lengths
+FEATURES ........ Stake pockets, gooseneck-compatible, toolboxes, racks
+DUMPS ........... Landscape, mason, contractor bodies
+HYDRAULICS ...... Installed &amp; tested in-house before delivery
+CHASSIS FIT ..... Single-axle through medium-duty</div>
+</div></div>
+
+<div class="section"><div class="wrap">
+  <p class="eyebrow">How It Works</p>
+  <h2 class="h-lg">From First Call to Finished Build</h2>
+  <div class="process-grid" style="margin-top:30px;"><div class="proc-step"><span class="n">01</span><h3>Tell us what you need.</h3><p>Chassis, body type, timeline. Two minutes on the form or a phone call.</p></div><div class="proc-step"><span class="n">02</span><h3>Get a real quote, fast.</h3><p>Price and lead time from someone who's actually going to build it.</p></div><div class="proc-step"><span class="n">03</span><h3>We build it.</h3><p>Welded, assembled, and powder coated in one facility in Madison, GA.</p></div><div class="proc-step"><span class="n">04</span><h3>You pick it up or we deliver.</h3><p>On the date we quoted. That's the whole point.</p></div></div>
+</div></div>
+
+
+<div class="section" style="padding-top:0;"><div class="wrap">
+  <p class="eyebrow">Recent Builds</p>
+  <h2 class="h-lg">See the Work</h2>
+  <div class="gallery" style="margin-top:26px;"><div class="g-item"><span>[Photo: Steel flatbed, loaded]</span></div><div class="g-item"><span>[Photo: Aluminum flatbed detail]</span></div><div class="g-item"><span>[Photo: Dump body, hoist up]</span></div><div class="g-item"><span>[Photo: Tailgate mechanism]</span></div><div class="g-item"><span>[Photo: Stake pocket detail]</span></div><div class="g-item"><span>[Photo: Mason dump body]</span></div><div class="g-item"><span>[Photo: Powder coat finish]</span></div><div class="g-item"><span>[Photo: Delivery, flatbed]</span></div></div>
+</div></div>
+
+
+<div class="section" style="padding-top:0;"><div class="wrap" style="max-width:820px;">
+  <p class="eyebrow">Questions</p>
+  <h2 class="h-lg">FAQ</h2>
+  <div class="faq" style="margin-top:24px;"><details><summary>Steel or aluminum flatbed?</summary><p>Steel for daily abuse and drag loads; aluminum when payload and corrosion matter more. We'll tell you straight which fits your work.</p></details><details><summary>Do you install the hoist and hydraulics?</summary><p>Yes, installed, plumbed, and tested in our shop before delivery. One warranty, one shop, no finger-pointing.</p></details><details><summary>Can you replace the bed on my existing truck?</summary><p>Yes. Flatbed replacements on existing chassis are common work for us. Tell us the truck in the quote form.</p></details><details><summary>What sizes do you build?</summary><p>Standard 8' to 26' and custom lengths in between. If your chassis can carry it, we can build it.</p></details><details><summary>How fast can I get one?</summary><p>Flatbeds are among our fastest builds. Give us your deadline, if we can't hit it, we'll say so up front.</p></details></div>
+</div></div>
+
+
+<div class="cta-final"><div class="wrap">
+  <h2>Built to Carry the Load, Not Just Look Good Empty</h2>
+  <p style="color:#c7cacb;max-width:52ch;margin:0 auto;">Tell us the chassis and the job. We'll quote a real date and hit it.</p>
+  <a href="#top-form" class="btn-lg">Get My Quote</a>
+</div></div>
+
+
+<div class="sticky-mobile">
+  <a class="call" href="tel:706-343-4230">Call Now</a>
+  <a href="#top-form" style="background:var(--steel-800);">Get a Quote</a>
+</div>
+
+
+<footer>
+  <div class="wrap">
+    <div>
+      <strong style="color:#fff;">BI Truck &amp; Body</strong><br>
+      1291 Lions Club Road Suite 100, Madison, GA 30650<br>
+      <a href="tel:706-343-4230">(706) 343-4230</a> &middot;
+      <a href="mailto:fleet@bitruckbody.com">fleet@bitruckbody.com</a>
+    </div>
+    <div>
+      <a href="https://bitruckbody.com/privacy">Privacy Policy</a><br>
+      <a href="https://bitruckbody.com/">Return to Main Site</a>
+    </div>
+  </div>
+</footer>
+<script>
+// ---- UTM/gclid capture into hidden fields (unchanged) ----
+(function(){
+  var params = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid'];
+  var qs = new URLSearchParams(window.location.search);
+  document.querySelectorAll('form[data-lead-form]').forEach(function(form){
+    params.forEach(function(p){
+      var val = qs.get(p) || '';
+      var input = document.createElement('input');
+      input.type = 'hidden'; input.name = p; input.value = val;
+      form.appendChild(input);
+    });
+    var pageInput = document.createElement('input');
+    pageInput.type = 'hidden'; pageInput.name = 'landing_page'; pageInput.value = document.title;
+    form.appendChild(pageInput);
+  });
+})();
+
+// ---- Conversion firing on form submit (no thank-you page required) ----
+// This is Google's own documented pattern for tracking a form submission
+// as a conversion when there is no dedicated confirmation page to load a
+// tag on. It fires GA4's lead event and the Google Ads conversion event
+// at the moment of submission, then lets the form continue submitting
+// normally. Built once here -- the dev team does not need to write or
+// wire any of this logic themselves.
+(function(){
+  document.querySelectorAll('form[data-lead-form]').forEach(function(form){
+    form.addEventListener('submit', function(event){
+      event.preventDefault();
+      var alreadySubmitting = form.getAttribute('data-submitting');
+      if (alreadySubmitting) { return; }
+      form.setAttribute('data-submitting', 'true');
+
+      var proceed = function(){
+        // Bypasses this same submit listener to avoid an infinite loop,
+        // then submits the form exactly as it would have without any of
+        // this tracking logic attached.
+        HTMLFormElement.prototype.submit.call(form);
+      };
+
+      if (typeof gtag === 'function') {
+        // GA4 lead event -- mark as a Key Event inside the GA4 UI
+        // (Admin > Events > Mark as key event) once this fires at least
+        // once. No code change needed for that step, it's a toggle in
+        // Google Analytics itself.
+        gtag('event', 'generate_lead', {
+          'form_name': document.title
+        });
+        // Google Ads conversion event -- real conversion action:
+        // "Submit lead form" (created 7/31/2026).
+        gtag('event', 'conversion', {
+          'send_to': 'AW-18353835974/2BOjCI6c09kcEMaf5a9E',
+          'value': 1.0,
+          'currency': 'USD',
+          'event_callback': proceed,
+          'event_timeout': 2000
+        });
+      } else {
+        proceed();
+      }
+
+      // Safety net: if gtag never calls back within 2s for any reason,
+      // submit anyway rather than silently losing a real lead.
+      setTimeout(proceed, 2100);
+    });
+  });
+})();
+</script>
+
+<script type="text/javascript" src="//cdn.callrail.com/companies/232505963/f14a5dc28c36ef13edf9/12/swap.js"></script>
+
+</body>
+</html>
