@@ -5,6 +5,7 @@ const TO_EMAIL = process.env.LP_LEAD_TO_EMAIL ?? 'fleet@bitruckbody.com';
 const FROM_EMAIL = process.env.LP_LEAD_FROM_EMAIL ?? 'onboarding@resend.dev';
 const REPLY_TO = process.env.LP_LEAD_REPLY_TO ?? 'fleet@bitruckbody.com';
 const THANK_YOU_PATH = '/lp/thank-you';
+const SITE_URL = process.env.LP_SITE_URL || process.env.NEXT_PUBLIC_SITE_URL;
 
 function esc(value: string): string {
   return value
@@ -105,5 +106,6 @@ export async function POST(request: NextRequest) {
     console.error('[lp-lead] LEAD:', JSON.stringify(lead));
   }
 
-  return NextResponse.redirect(new URL(THANK_YOU_PATH, request.url), 303);
+  const redirectBase = SITE_URL ?? request.url;
+  return NextResponse.redirect(new URL(THANK_YOU_PATH, redirectBase), 303);
 }
