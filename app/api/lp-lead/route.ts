@@ -5,7 +5,17 @@ const TO_EMAIL = process.env.LP_LEAD_TO_EMAIL ?? 'fleet@bitruckbody.com';
 const FROM_EMAIL = process.env.LP_LEAD_FROM_EMAIL ?? 'onboarding@resend.dev';
 const REPLY_TO = process.env.LP_LEAD_REPLY_TO ?? 'fleet@bitruckbody.com';
 const THANK_YOU_PATH = '/lp/thank-you';
-const SITE_URL = process.env.LP_SITE_URL || process.env.NEXT_PUBLIC_SITE_URL;
+const SITE_URL = (() => {
+  const raw = process.env.LP_SITE_URL?.trim();
+  if (!raw) return undefined;
+  try {
+    const parsed = new URL(raw);
+    if (parsed.protocol !== 'https:') return undefined;
+    return parsed.origin;
+  } catch {
+    return undefined;
+  }
+})();
 
 function esc(value: string): string {
   return value
