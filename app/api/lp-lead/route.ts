@@ -17,6 +17,20 @@ const SITE_URL = (() => {
   }
 })();
 
+function resolveRedirectBase(request: NextRequest): string {
+  if (SITE_URL) return SITE_URL;
+  const fwdHost = request.headers.get('x-forwarded-host');
+  const fwdProto = request.headers.get('x-forwarded-proto');
+  if (fwdHost) {
+    return `${fwdProto ?? 'https'}://${fwdHost}`;
+  }
+  const host = request.headers.get('host');
+  if (host && !host.startsWith('localhost')) {
+    return `https://${host}`;
+  }
+  return request.url;
+}
+
 function esc(value: string): string {
   return value
     .replace(/&/g, '&amp;')
@@ -116,6 +130,6 @@ export async function POST(request: NextRequest) {
     console.error('[lp-lead] LEAD:', JSON.stringify(lead));
   }
 
-  const redirectBase = SITE_URL ?? request.url;
+  const redirectBase = resolveRedirectBase(request);
   return NextResponse.redirect(new URL(THANK_YOU_PATH, redirectBase), 303);
 }
