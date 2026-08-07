@@ -11,6 +11,8 @@ const fromEmail =
   'noreply@bitruckbody.com';
 const replyToEmail = process.env.LP_LEAD_REPLY_TO ?? toEmail;
 const thankYouPath = '/lp/thank-you';
+const deliveryError =
+  'Something went wrong. Please call (706) 343-4230 or try again.';
 
 function getSiteUrl() {
   const raw = (
@@ -144,24 +146,30 @@ export async function POST(request: NextRequest) {
     `gclid: ${emptyFallback(lead.gclid)}`,
   ].join('\n');
 
-  if (process.env.RESEND_API_KEY) {
-    try {
-      const resend = new Resend(process.env.RESEND_API_KEY);
-      await resend.emails.send({
-        from: `BI Truck & Body Lead <${fromEmail}>`,
-        to: toEmail,
-        replyTo: lead.email || replyToEmail,
-        subject: `New LP Quote Request: ${lead.buildType || 'Truck Body'}`,
-        html,
-        text,
-      });
-    } catch (error) {
-      console.error('[lp-lead] Resend failed, lead preserved in logs:', error);
-      console.error('[lp-lead] Lead:', JSON.stringify(lead));
-    }
-  } else {
+  if (!process.env.RESEND_API_KEY) {
     console.error('[lp-lead] RESEND_API_KEY missing, lead preserved in logs:');
     console.error('[lp-lead] Lead:', JSON.stringify(lead));
+    return NextResponse.json({ error: deliveryError }, { status: 500 });
+  }
+
+  try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    const result = await resend.emails.send({
+      from: `BI Truck & Body Lead <${fromEmail}>`,
+      to: toEmail,
+      replyTo: lead.email || replyToEmail,
+      subject: `New LP Quote Request: ${lead.buildType || 'Truck Body'}`,
+      html,
+      text,
+    });
+
+    if (result.error) {
+      throw result.error;
+    }
+  } catch (error) {
+    console.error('[lp-lead] Resend failed, lead preserved in logs:', error);
+    console.error('[lp-lead] Lead:', JSON.stringify(lead));
+    return NextResponse.json({ error: deliveryError }, { status: 500 });
   }
 
   return redirectToThankYou();
