@@ -87,6 +87,20 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${barlowCondensed.variable} ${ibmPlexSans.variable}`}>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TN65S3LR');`,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `!function(key) {if (window.reb2b) return;window.reb2b = {loaded: true};var s = document.createElement("script");s.async = true;s.src = "https://ddwl4m2hdecbv.cloudfront.net/b/" + key + "/" + key + ".js.gz";document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);}("46DJ4HVWD061");`,
+          }}
+        />
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"
@@ -99,6 +113,12 @@ gtag('config', '${GA_MEASUREMENT_ID}');`}
         </Script>
       </head>
       <body className="min-h-screen bg-graphite-950 font-sans text-graphite-200 antialiased">
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html:
+              '<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TN65S3LR" height="0" width="0" style="display:none;visibility:hidden"></iframe>',
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
           type="application/ld+json"
