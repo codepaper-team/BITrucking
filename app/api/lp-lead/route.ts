@@ -13,6 +13,27 @@ const replyToEmail = process.env.LP_LEAD_REPLY_TO ?? toEmail;
 const thankYouPath = '/lp/thank-you';
 const deliveryError =
   'Something went wrong. Please call (706) 343-4230 or try again.';
+const sheetWebhookUrl =
+  'https://script.google.com/macros/s/AKfycbzE6mVVDU4Dkj2ZOAMJNZH7DpEoSrup1m2oLmLI1v5I1wXsA_Q6sY4KEdUiVz20FXDZ/exec';
+const sheetWebhookSecret = 'tkVlaQqzUQVOvGVILezy6hBlR8GLXSuW';
+
+type Lead = {
+  name: string;
+  company: string;
+  phone: string;
+  email: string;
+  buildType: string;
+  timeline: string;
+  chassis: string;
+  notes: string;
+  landingPage: string;
+  utmSource: string;
+  utmMedium: string;
+  utmCampaign: string;
+  utmContent: string;
+  utmTerm: string;
+  gclid: string;
+};
 
 function getSiteUrl() {
   const raw = (
@@ -75,9 +96,35 @@ function redirectToThankYou() {
   });
 }
 
+function sendSheetWebhook(lead: Lead) {
+  void fetch(sheetWebhookUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      action: 'newLead',
+      secret: sheetWebhookSecret,
+      name: lead.name,
+      company: lead.company,
+      phone: lead.phone,
+      email: lead.email,
+      buildType: lead.buildType,
+      timeline: lead.timeline,
+      chassis: lead.chassis,
+      notes: lead.notes,
+      utm_source: lead.utmSource,
+      utm_medium: lead.utmMedium,
+      utm_campaign: lead.utmCampaign,
+      utm_term: lead.utmTerm,
+      utm_content: lead.utmContent,
+      gclid: lead.gclid,
+      landingPage: lead.landingPage,
+    }),
+  }).catch((error) => console.error('[lp-lead] Sheet webhook failed', error));
+}
+
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
-  const lead = {
+  const lead: Lead = {
     name: getFormValue(formData, 'name'),
     company: getFormValue(formData, 'company'),
     phone: getFormValue(formData, 'phone'),
@@ -171,6 +218,8 @@ export async function POST(request: NextRequest) {
     console.error('[lp-lead] Lead:', JSON.stringify(lead));
     return NextResponse.json({ error: deliveryError }, { status: 500 });
   }
+
+  sendSheetWebhook(lead);
 
   return redirectToThankYou();
 }
