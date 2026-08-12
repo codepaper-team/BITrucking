@@ -322,7 +322,7 @@ NOTE ............. If you can spec it, we can build it or get it in. If you
   });
 })();
 
-// ---- Conversion firing and production-safe form redirect ----
+// ---- Production-safe form submit and GTM success event ----
 // The API currently returns a 303 Location. Submit with fetch so the browser
 // never follows a misconfigured absolute Location from the API.
 (function(){
@@ -333,6 +333,16 @@ NOTE ............. If you can spec it, we can build it or get it in. If you
       form.setAttribute('data-submitting', 'true');
 
       var submitted = false;
+      var trackLeadSuccess = function(){
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'lead_success',
+          'form_name': document.title,
+          'form_id': 'lp_lead',
+          'landing_page': document.title
+        });
+      };
+
       var submitLead = function(){
         if (submitted) { return; }
         submitted = true;
@@ -344,6 +354,7 @@ NOTE ............. If you can spec it, we can build it or get it in. If you
           credentials: 'same-origin'
         }).then(function(response){
           if (response.ok || response.type === 'opaqueredirect' || (response.status >= 300 && response.status < 400)) {
+            trackLeadSuccess();
             window.location.assign('/lp/thank-you');
             return;
           }
@@ -354,22 +365,7 @@ NOTE ............. If you can spec it, we can build it or get it in. If you
         });
       };
 
-      if (typeof gtag === 'function') {
-        gtag('event', 'generate_lead', {
-          'form_name': document.title
-        });
-        gtag('event', 'conversion', {
-          'send_to': 'AW-18353835974/2BOjCI6c09kcEMaf5a9E',
-          'value': 1.0,
-          'currency': 'USD',
-          'event_callback': submitLead,
-          'event_timeout': 2000
-        });
-      } else {
-        submitLead();
-      }
-
-      setTimeout(submitLead, 2100);
+      submitLead();
     });
   });
 })();
