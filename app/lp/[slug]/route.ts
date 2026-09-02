@@ -10,6 +10,7 @@ const allowedSlugs = new Set([
   'flatbed-dump-bodies',
   'fleet-upfitting',
   'van-bodies',
+  'powder-coating',
   'thank-you',
 ]);
 

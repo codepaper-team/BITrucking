@@ -16,6 +16,7 @@ const landingPageRoutes = [
   '/lp/flatbed-dump-bodies',
   '/lp/fleet-upfitting',
   '/lp/van-bodies',
+  '/lp/powder-coating',
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
