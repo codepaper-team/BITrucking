@@ -8,26 +8,25 @@ interface LogoProps {
 }
 
 function Logo({ linked = true, size = 'header' }: LogoProps) {
-  const sizeClasses =
-    size === 'footer'
-      ? 'w-[180px] sm:w-[220px]'
-      : 'w-[132px] sm:w-[152px] lg:w-[164px] xl:w-[176px]';
+  const isFooter = size === 'footer';
+  const sizeClasses = isFooter
+    ? 'w-[104px] sm:w-[120px]'
+    : 'w-[58px] sm:w-[62px] lg:w-[66px] xl:w-[70px]';
 
   const content = (
-    <div className={`${sizeClasses} shrink-0`}>
+    <div className={`${sizeClasses} shrink-0 overflow-hidden`}>
       <Image
-        src="/bi-assets/images/bi-logo.png"
+        src="/bi-assets/images/bi-logo-primary.png"
         alt={company.name}
-        width={720}
-        height={384}
+        width={isFooter ? 1920 : 3684}
+        height={isFooter ? 2400 : 1191}
         priority={linked}
-        quality={100}
         sizes={
-          size === 'footer'
-            ? '(min-width: 640px) 220px, 180px'
-            : '(min-width: 1280px) 176px, (min-width: 1024px) 164px, (min-width: 640px) 152px, 132px'
+          isFooter
+            ? '(min-width: 640px) 120px, 104px'
+            : '(min-width: 1280px) 70px, (min-width: 1024px) 66px, (min-width: 640px) 62px, 58px'
         }
-        className="h-auto w-full object-contain"
+        className="h-auto w-full [clip-path:inset(1px)] object-contain"
       />
     </div>
   );

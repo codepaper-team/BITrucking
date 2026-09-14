@@ -12,7 +12,7 @@ function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-graphite-800 bg-graphite-950">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#231f20]">
       <div className="shell">
         <div className="flex min-h-[92px] items-center justify-between gap-5 xl:min-h-[96px]">
           <Logo />
@@ -56,7 +56,7 @@ function Header() {
       </div>
 
       {isOpen ? (
-        <div className="border-t border-graphite-800 bg-graphite-950 lg:hidden">
+        <div className="border-t border-white/10 bg-[#231f20] lg:hidden">
           <div className="shell py-5">
             <nav className="grid gap-2">
               {navItems.map((item) => (

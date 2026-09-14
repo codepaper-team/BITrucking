@@ -6,7 +6,7 @@ import Logo from './Logo';
 
 function Footer() {
   return (
-    <footer className="border-t-4 border-amber-600 bg-graphite-950">
+    <footer className="border-t-4 border-amber-600 bg-[#231f20]">
       <div className="shell py-16 sm:py-18">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.65fr_1fr_1fr]">
           <div className="space-y-6">
