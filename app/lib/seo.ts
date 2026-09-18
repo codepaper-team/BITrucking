@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { company } from './company';
 
-const fallbackSiteUrl = 'https://bitruckbody.com';
+const fallbackSiteUrl = 'https://www.bitruckbody.com';
 
 export const siteUrl = (
   process.env.NEXT_PUBLIC_SITE_URL ||
