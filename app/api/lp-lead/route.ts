@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { after, NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-export const preferredRegion = 'yul1';
+export const maxDuration = 300;
 
 const toEmail =
   process.env.CONTACT_TO_EMAIL ??
@@ -119,7 +119,7 @@ async function sendSheetWebhook(lead: Lead) {
     // googleusercontent.com response URL. Following that redirect can hang in
     // serverless runtimes even though the sheet write has already completed.
     redirect: 'manual',
-    signal: AbortSignal.timeout(30_000),
+    signal: AbortSignal.timeout(120_000),
     body: JSON.stringify({
       action: 'newLead',
       secret: sheetWebhookSecret,
@@ -234,16 +234,17 @@ export async function POST(request: NextRequest) {
     `gclid: ${emptyFallback(lead.gclid)}`,
   ].join('\n');
 
-  try {
-    await sendSheetWebhook(lead);
-    console.info('[lp-lead] Tracker delivery succeeded', {
-      landingPage: lead.landingPage,
-    });
-  } catch (error) {
-    console.error('[lp-lead] Tracker delivery failed:', error);
-    console.error('[lp-lead] Lead preserved:', JSON.stringify(lead));
-    return NextResponse.json({ error: deliveryError }, { status: 500 });
-  }
+  after(async () => {
+    try {
+      await sendSheetWebhook(lead);
+      console.info('[lp-lead] Tracker delivery succeeded', {
+        landingPage: lead.landingPage,
+      });
+    } catch (error) {
+      console.error('[lp-lead] Tracker delivery failed:', error);
+      console.error('[lp-lead] Lead preserved:', JSON.stringify(lead));
+    }
+  });
 
   if (!process.env.RESEND_API_KEY) {
     console.error('[lp-lead] RESEND_API_KEY missing, lead preserved in logs:');
