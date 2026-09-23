@@ -13,9 +13,14 @@ const replyToEmail = process.env.LP_LEAD_REPLY_TO ?? toEmail;
 const thankYouPath = '/lp/thank-you';
 const deliveryError =
   'Something went wrong. Please call (706) 343-4230 or try again.';
+// Keep the last-known production values as a temporary fallback until a Vercel
+// project owner can add the two LP_LEAD_WEBHOOK_* variables to Production.
 const sheetWebhookUrl =
+  process.env.LP_LEAD_WEBHOOK_URL?.trim() ||
   'https://script.google.com/macros/s/AKfycbzE6mVVDU4Dkj2ZOAMJNZH7DpEoSrup1m2oLmLI1v5I1wXsA_Q6sY4KEdUiVz20FXDZ/exec';
-const sheetWebhookSecret = 'tkVlaQqzUQVOvGVILezy6hBlR8GLXSuW';
+const sheetWebhookSecret =
+  process.env.LP_LEAD_WEBHOOK_SECRET?.trim() ||
+  'tkVlaQqzUQVOvGVILezy6hBlR8GLXSuW';
 
 type Lead = {
   name: string;
@@ -96,10 +101,16 @@ function redirectToThankYou() {
   });
 }
 
-function sendSheetWebhook(lead: Lead) {
-  void fetch(sheetWebhookUrl, {
+async function sendSheetWebhook(lead: Lead) {
+  if (!sheetWebhookUrl || !sheetWebhookSecret) {
+    throw new Error('LP lead webhook configuration is missing.');
+  }
+
+  const response = await fetch(sheetWebhookUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
+    redirect: 'follow',
+    signal: AbortSignal.timeout(10_000),
     body: JSON.stringify({
       action: 'newLead',
       secret: sheetWebhookSecret,
@@ -119,7 +130,24 @@ function sendSheetWebhook(lead: Lead) {
       gclid: lead.gclid,
       landingPage: lead.landingPage,
     }),
-  }).catch((error) => console.error('[lp-lead] Sheet webhook failed', error));
+  });
+
+  const responseText = await response.text();
+  let responseBody: { error?: unknown } | null = null;
+
+  try {
+    responseBody = responseText
+      ? (JSON.parse(responseText) as { error?: unknown })
+      : null;
+  } catch {
+    // A successful Apps Script deployment may return an empty or non-JSON body.
+  }
+
+  if (!response.ok || responseBody?.error) {
+    throw new Error(
+      `LP lead webhook rejected the request (status ${response.status}).`
+    );
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -193,6 +221,17 @@ export async function POST(request: NextRequest) {
     `gclid: ${emptyFallback(lead.gclid)}`,
   ].join('\n');
 
+  try {
+    await sendSheetWebhook(lead);
+    console.info('[lp-lead] Tracker delivery succeeded', {
+      landingPage: lead.landingPage,
+    });
+  } catch (error) {
+    console.error('[lp-lead] Tracker delivery failed:', error);
+    console.error('[lp-lead] Lead preserved:', JSON.stringify(lead));
+    return NextResponse.json({ error: deliveryError }, { status: 500 });
+  }
+
   if (!process.env.RESEND_API_KEY) {
     console.error('[lp-lead] RESEND_API_KEY missing, lead preserved in logs:');
     console.error('[lp-lead] Lead:', JSON.stringify(lead));
@@ -218,8 +257,6 @@ export async function POST(request: NextRequest) {
     console.error('[lp-lead] Lead:', JSON.stringify(lead));
     return NextResponse.json({ error: deliveryError }, { status: 500 });
   }
-
-  sendSheetWebhook(lead);
 
   return redirectToThankYou();
 }
