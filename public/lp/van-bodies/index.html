@@ -331,13 +331,15 @@ CHASSIS FIT ..... Medium-duty cab &amp; chassis, 96" or 102" body width</div>
       form.setAttribute('data-submitting', 'true');
 
       var submitted = false;
-      var trackLeadSuccess = function(){
+      var trackLeadSuccess = function(formData){
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
           'event': 'lead_success',
           'form_name': document.title,
           'form_id': 'lp_lead',
-          'landing_page': document.title
+          'landing_page': document.title,
+          'email': String(formData.get('email') || '').trim(),
+          'phone': String(formData.get('phone') || '').trim()
         });
       };
 
@@ -345,14 +347,16 @@ CHASSIS FIT ..... Medium-duty cab &amp; chassis, 96" or 102" body width</div>
         if (submitted) { return; }
         submitted = true;
 
+        var formData = new FormData(form);
+
         fetch(form.action || '/api/lp-lead', {
           method: form.method || 'POST',
-          body: new FormData(form),
+          body: formData,
           redirect: 'manual',
           credentials: 'same-origin'
         }).then(function(response){
           if (response.ok || response.type === 'opaqueredirect' || (response.status >= 300 && response.status < 400)) {
-            trackLeadSuccess();
+            trackLeadSuccess(formData);
             window.location.assign('/lp/thank-you');
             return;
           }
