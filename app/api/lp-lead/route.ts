@@ -110,7 +110,7 @@ async function sendSheetWebhook(lead: Lead) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     redirect: 'follow',
-    signal: AbortSignal.timeout(10_000),
+    signal: AbortSignal.timeout(30_000),
     body: JSON.stringify({
       action: 'newLead',
       secret: sheetWebhookSecret,
