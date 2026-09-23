@@ -108,7 +108,11 @@ async function sendSheetWebhook(lead: Lead) {
 
   const response = await fetch(sheetWebhookUrl, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'User-Agent': 'BITruckBody-Lead-Webhook/1.0',
+    },
     // Apps Script completes the POST, then redirects to a temporary
     // googleusercontent.com response URL. Following that redirect can hang in
     // serverless runtimes even though the sheet write has already completed.
