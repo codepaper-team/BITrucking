@@ -109,7 +109,10 @@ async function sendSheetWebhook(lead: Lead) {
   const response = await fetch(sheetWebhookUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    redirect: 'follow',
+    // Apps Script completes the POST, then redirects to a temporary
+    // googleusercontent.com response URL. Following that redirect can hang in
+    // serverless runtimes even though the sheet write has already completed.
+    redirect: 'manual',
     signal: AbortSignal.timeout(30_000),
     body: JSON.stringify({
       action: 'newLead',
@@ -131,6 +134,10 @@ async function sendSheetWebhook(lead: Lead) {
       landingPage: lead.landingPage,
     }),
   });
+
+  if (response.status >= 300 && response.status < 400) {
+    return;
+  }
 
   const responseText = await response.text();
   let responseBody: { error?: unknown } | null = null;
