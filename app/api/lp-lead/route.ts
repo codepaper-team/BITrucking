@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
+export const preferredRegion = 'yul1';
+
 const toEmail =
   process.env.CONTACT_TO_EMAIL ??
   process.env.LP_LEAD_TO_EMAIL ??
